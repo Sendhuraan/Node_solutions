@@ -6,10 +6,15 @@
   "scripts": {
     "start": "pm2 start index.js",
     "stop": "pm2 stop all",
-    "lint": "eslint src/collection/http-server"
+    "lint": "eslint src/collection"
   },
   "author": "Sendhuraan NKK",
   "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
