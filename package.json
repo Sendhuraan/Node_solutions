@@ -6,7 +6,7 @@
   "scripts": {
     "start": "pm2 start index.js",
     "stop": "pm2 stop all",
-    "lint": "eslint src/collection"
+    "lint": "eslint src/collection --color"
   },
   "author": "Sendhuraan NKK",
   "license": "ISC",
