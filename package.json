@@ -6,7 +6,7 @@
   "scripts": {
     "start": "pm2 start index.js",
     "stop": "pm2 stop all",
-    "lint": "eslint src/collection --color"
+    "lint": "eslint . --color"
   },
   "author": "Sendhuraan NKK",
   "license": "ISC",
@@ -50,8 +50,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "@sendhuraan/frontend-solutions": "^1.0.0",
-    "@sendhuraan/js-utilities": "file:src/collection/js-utilities",
+    "@sendhuraan/frontend-solutions": "^1.0.4",
     "axios": "^0.18.0",
     "base64-encode-stream": "^1.0.0",
     "body-parser": "^1.18.3",

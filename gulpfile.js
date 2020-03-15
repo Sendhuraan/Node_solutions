@@ -27,10 +27,12 @@
 
 	program
 		.option('-d --dir <value>', 'Input folder name')
+		.option('-s --serve-dir <value>', 'Serve folder name')
 		.option('--debug <value>', 'Build environment')
 		.parse(process.argv);
 
 	var DIRNAME = program.dir;
+	var SERVE_DIR = program.serveDir;
 	var DEBUG_PORT = Number(program.debug);
 
 	var commonConfigs = {
@@ -43,6 +45,8 @@
 	var { SolutionConfig } = require('./build/utilities/config-generator');
 	var DEFAULTS = require('./build/config/constants').defaults;
 
+	var { DEFAULT_SERVE_DIR } = DEFAULTS;
+
 	var pageConfigOptions = (function(dir) {
 		var path = `./src/collection/${dir}/config`;
 
@@ -53,7 +57,7 @@
 		}
 	})(DIRNAME);
 
-	var sourceDir = (function(dir) {
+	var sourceDirName = (function(dir) {
 		var path = `./src/collection/${dir}`;
 
 		if (!dir) {
@@ -65,9 +69,20 @@
 		}
 	})(DIRNAME);
 
+	var serveDirName = (function(dir) {
+		var path = `${DEFAULT_SERVE_DIR}/${dir}`;
+
+		if (!fs.existsSync(path)) {
+			throw new Error('SERVE DIRECTORY DOES NOT EXISTS');
+		} else {
+			return dir;
+		}
+	})(SERVE_DIR);
+
 	var solutionConfig = new SolutionConfig(
 		DEFAULTS,
-		sourceDir,
+		sourceDirName,
+		serveDirName,
 		commonConfigs,
 		pageConfigOptions
 	);

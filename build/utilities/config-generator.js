@@ -19,15 +19,12 @@
 
 	function SolutionConfig(
 		DEFAULTS,
-		solutionDir,
+		solutionDirName,
+		serveDirName,
 		commonConfigs,
 		solutionConfigOptions
 	) {
-		var {
-			DEFAULT_FOLDER_STRING,
-			DEFAULT_LINT__GLOBAL,
-			DEFAULT_UTILS_DIR
-		} = DEFAULTS;
+		var { DEFAULT_FOLDER_STRING, DEFAULT_SERVE_DIR } = DEFAULTS;
 
 		var {
 			lintConfig,
@@ -40,17 +37,13 @@
 		var solutionDependencies = solutionConfigOptions.dependencies;
 		var solutionEnvironments = solutionConfigOptions.environments;
 
-		var isNodeLint = solutionConfig.node.lint;
-
 		var isNode = solutionConfig.node;
-
 		var isNodeTest = solutionConfig.node.test;
-
 		var isNodeBundle = solutionConfig.node.bundle;
+		var serveDir = path.resolve(path.join(DEFAULT_SERVE_DIR, serveDirName));
 
-		var serveDir = path.resolve(
-			'node_modules/@sendhuraan/frontend-solutions/dist/redux-observable'
-		);
+		console.log('servePath', serveDir);
+
 		if (solutionEnvironments) {
 			var isCloudDeploy = solutionEnvironments.cloud.enabled;
 			var isDependencies = solutionEnvironments.cloud.includeDependencies;
@@ -60,7 +53,7 @@
 			var isNodeDB = solutionEnvironments.workstation.instance.parameters.db;
 		}
 
-		var SOURCE_DIR = `${DEFAULT_FOLDER_STRING}/${solutionDir}`;
+		var SOURCE_DIR = `${DEFAULT_FOLDER_STRING}/${solutionDirName}`;
 
 		if (isNode) {
 			var NODE_LINT_PATTERN__PARAM = ['**/*.js'];
@@ -112,11 +105,6 @@
 			DEPLOY_DIR__PARAM,
 			isCloudDeploy
 		);
-
-		if (isNodeServer) {
-			var NODE_SERVER_RENDER =
-				solutionEnvironments.workstation.instance.parameters.server.render;
-		}
 
 		if (isNodeDB) {
 			var NODE_DB_ENV_PARAMS =
@@ -258,6 +246,7 @@
 			var isCloudDB = solutionEnvironments.cloud.parameters.db;
 		}
 
+		/* eslint-disable no-mixed-spaces-and-tabs */
 		this.config = {
 			node: isNode
 				? {
@@ -306,6 +295,7 @@
 				  }
 				: false
 		};
+		/* eslint-enable no-mixed-spaces-and-tabs */
 
 		this.replaceWithSSM = async function(parameter) {
 			var cacheFile = path.resolve(`${SOURCE_DIR}/.tmp/aws.cache.json`);
