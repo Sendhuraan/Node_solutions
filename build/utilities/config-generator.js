@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
 	var fs = require('fs');
 	var path = require('path');
 
@@ -58,8 +58,8 @@
 		if (isNode) {
 			var NODE_LINT_PATTERN__PARAM = ['**/*.js'];
 
-			var NODE_LINT_PATTERN = (function(param, inputDir) {
-				return param.map(function(pattern) {
+			var NODE_LINT_PATTERN = (function (param, inputDir) {
+				return param.map(function (pattern) {
 					if (pattern.includes('!')) {
 						return `!${inputDir}/${pattern.split('!')[1]}`;
 					} else {
@@ -70,9 +70,9 @@
 
 			if (!isCloudDeploy && (isNodeServer || isNodeDB)) {
 				var NODE_DIR__PARAM = solutionConfig.dirs.node;
-				var NODE_DIR = (function(param, inputDir) {
+				var NODE_DIR = (function (param, inputDir) {
 					if (param) {
-						return param.map(function(folder) {
+						return param.map(function (folder) {
 							return `${inputDir}/${folder}`;
 						});
 					} else {
@@ -83,14 +83,14 @@
 		}
 
 		var OUTPUT_DIR__PARAM = solutionConfig.dirs.output;
-		var OUTPUT_DIR__GROUP = (function(param, inputDir) {
+		var OUTPUT_DIR__GROUP = (function (param, inputDir) {
 			return `${inputDir}/${param}`;
 		})(OUTPUT_DIR__PARAM, SOURCE_DIR);
 
 		var DEVELOPMENT_DIR__PARAM = solutionConfig.dirs.development;
 		var DEPLOY_DIR__PARAM = solutionConfig.dirs.deploy;
 
-		var OUTPUT_DIR = (function(outputDir, inputDir, devDir, deployDir, cloud) {
+		var OUTPUT_DIR = (function (outputDir, inputDir, devDir, deployDir, cloud) {
 			if (outputDir && deployDir && cloud) {
 				return `${inputDir}/${outputDir}/${deployDir}`;
 			} else if (outputDir && devDir) {
@@ -110,11 +110,11 @@
 			var NODE_DB_ENV_PARAMS =
 				solutionEnvironments.workstation.instance.parameters.db;
 
-			var NODE_DB_PARAMS = (function(envParams) {
+			var NODE_DB_PARAMS = (function (envParams) {
 				return {
 					connectionURL: `${envParams.protocol}${
 						envParams.username ? `${envParams.username}:` : ''
-					}${envParams.password ? `${envParams.password}` : ''}@localhost:${
+					}${envParams.password ? `${envParams.password}@` : ''}localhost:${
 						envParams.port
 					}`,
 					name: `${envParams.name}`
@@ -129,8 +129,8 @@
 			var NODE_TEST_OPTIONS;
 			var NODE_TEST_PATTERN;
 
-			NODE_TEST_PATTERN = (function(param, inputDir) {
-				return param.map(function(item) {
+			NODE_TEST_PATTERN = (function (param, inputDir) {
+				return param.map(function (item) {
 					return `${inputDir}/${item}`;
 				});
 			})(NODE_TEST_PATTERN__PARAM, SOURCE_DIR);
@@ -139,8 +139,8 @@
 				let { jestConfig } = jestTestConfig;
 				var jestNodeTestConfig = Object.assign({}, jestConfig);
 
-				let NODE_JEST_TEST_PATTERN = (function(param, inputDir) {
-					return param.map(function(item) {
+				let NODE_JEST_TEST_PATTERN = (function (param, inputDir) {
+					return param.map(function (item) {
 						return `${inputDir}/${item}`;
 					});
 				})(NODE_TEST_PATTERN__PARAM, '<rootDir>');
@@ -178,7 +178,7 @@
 			var NODE_BUNDLE_OUTPUT_FILE__PARAM =
 				solutionConfig.node.bundle.output.file;
 
-			var NODE_BUNDLE_ENTRY = (function(param, inputDir) {
+			var NODE_BUNDLE_ENTRY = (function (param, inputDir) {
 				return `${inputDir}/${param}`;
 			})(NODE_BUNDLE_ENTRY__PARAM, SOURCE_DIR);
 
@@ -186,11 +186,11 @@
 
 			var NODE_BUNDLE_OUTPUT_FILE = NODE_BUNDLE_OUTPUT_FILE__PARAM;
 
-			var NODE_MAIN_FILE = (function(param, inputDir) {
+			var NODE_MAIN_FILE = (function (param, inputDir) {
 				return `${inputDir}/${param}`;
 			})(NODE_BUNDLE_OUTPUT_FILE, OUTPUT_DIR);
 
-			var nodeBundleConfig = (function(config, entry, outputDir, outputFile) {
+			var nodeBundleConfig = (function (config, entry, outputDir, outputFile) {
 				var newConfig = Object.assign({}, config);
 
 				newConfig.entry = path.resolve(entry);
@@ -216,7 +216,7 @@
 
 			NODE_SERVER_ENV_PARAMS.serveDir = serveDir;
 
-			var NODE_SERVER_PARAMS = (function(envParams) {
+			var NODE_SERVER_PARAMS = (function (envParams) {
 				return {
 					port: envParams.port,
 					serveDir: envParams.serveDir
@@ -228,10 +228,10 @@
 			var solutionPackages = solutionDependencies;
 			var globalSolutionConfig = require('../../package.json');
 
-			var solutionPkgConfig = (function(config, metadata, listings) {
+			var solutionPkgConfig = (function (config, metadata, listings) {
 				var dependenciesObj = {};
 
-				listings.map(function(listing) {
+				listings.map(function (listing) {
 					dependenciesObj[listing] = config['dependencies'][listing];
 				});
 
@@ -297,10 +297,10 @@
 		};
 		/* eslint-enable no-mixed-spaces-and-tabs */
 
-		this.replaceWithSSM = async function(parameter) {
+		this.replaceWithSSM = async function (parameter) {
 			var cacheFile = path.resolve(`${SOURCE_DIR}/.tmp/aws.cache.json`);
 
-			var ssmParameterCache = (function() {
+			var ssmParameterCache = (function () {
 				if (fs.existsSync(cacheFile)) {
 					return require(cacheFile);
 				} else {
@@ -342,7 +342,7 @@
 			}
 		};
 
-		this.getAsyncData = async function() {
+		this.getAsyncData = async function () {
 			var instancesConfig = {};
 			var commandsConfig = {};
 			var cloudDBHostName = false;
@@ -473,7 +473,7 @@
 
 									let paramResolvedCommand = instanceCommands[command][
 										'commands'
-									].map(function(command) {
+									].map(function (command) {
 										let injectParamPattern = /(calc:{)(\w+)(})/;
 
 										if (injectParamPattern.test(command)) {
@@ -520,7 +520,7 @@
 		};
 	}
 
-	SolutionConfig.prototype.getConfig = async function() {
+	SolutionConfig.prototype.getConfig = async function () {
 		var asyncDataResolved = await this.getAsyncData();
 
 		if (this.config.deploy) {

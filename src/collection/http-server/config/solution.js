@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
 	var solution = {
 		node: {
 			test: {

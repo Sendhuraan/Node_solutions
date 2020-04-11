@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
 	var fs = require('fs');
 	var path = require('path');
 
@@ -47,7 +47,7 @@
 
 	var { DEFAULT_SERVE_DIR } = DEFAULTS;
 
-	var pageConfigOptions = (function(dir) {
+	var pageConfigOptions = (function (dir) {
 		var path = `./src/collection/${dir}/config`;
 
 		if (fs.existsSync(path)) {
@@ -57,7 +57,7 @@
 		}
 	})(DIRNAME);
 
-	var sourceDirName = (function(dir) {
+	var sourceDirName = (function (dir) {
 		var path = `./src/collection/${dir}`;
 
 		if (!dir) {
@@ -69,7 +69,7 @@
 		}
 	})(DIRNAME);
 
-	var serveDirName = (function(dir) {
+	var serveDirName = (function (dir) {
 		var path = `${DEFAULT_SERVE_DIR}/${dir}`;
 
 		if (!fs.existsSync(path)) {
@@ -158,7 +158,7 @@
 			let { bundle } = config.node;
 			shell.rm('-rf', path);
 
-			webpack(bundle, function(err, stats) {
+			webpack(bundle, function (err, stats) {
 				if (err) {
 					console.error(err.stack || err);
 					if (err.details) {
@@ -217,7 +217,7 @@
 				fs.writeFile(
 					`${output}/env.json`,
 					JSON.stringify(parameters, null, 4),
-					function(err) {
+					function (err) {
 						if (err) {
 							throw err;
 						} else {
@@ -270,7 +270,7 @@
 					`${node ? `${node}/**/.js` : ''}`
 			);
 
-			nodeWatcher.on('change', function(filepath) {
+			nodeWatcher.on('change', function (filepath) {
 				console.log(`File ${filepath} was changed`);
 				solutionProcess.kill('SIGINT');
 				nodeWatcher.close();
@@ -285,7 +285,7 @@
 
 			console.log('Watching changes for following ' + '\n' + `${dir}/*.js`);
 
-			solutionWatcher.on('change', function(filepath) {
+			solutionWatcher.on('change', function (filepath) {
 				console.log(`File ${filepath} was changed`);
 				solutionProcess.kill('SIGINT');
 				solutionWatcher.close();
@@ -406,7 +406,7 @@
 				console.log('Instance not Found');
 				console.log('Creating new instance');
 
-				create.map(async function(instance) {
+				create.map(async function (instance) {
 					var describeVpcs_Response = await ec2_service
 						.describeVpcs()
 						.promise();
@@ -445,7 +445,7 @@
 						.runInstances(instanceParams)
 						.promise();
 
-					ec2_instances.Instances.map(function(instance) {
+					ec2_instances.Instances.map(function (instance) {
 						console.log(`Instance (ID: ${instance.InstanceId}) Created`);
 					});
 				});
@@ -458,7 +458,7 @@
 	async function executeCommands() {
 		var { commands } = config.deploy;
 
-		var commandsList = (function(nameList) {
+		var commandsList = (function (nameList) {
 			var commandNames = [];
 
 			for (var name in nameList) {
@@ -540,7 +540,7 @@
 	const lint = parallel(lintNodeFiles);
 	const bundle = series(bundleNode);
 	const generateSolution = series(
-		lint,
+		// lint,
 		runNodeTests,
 		cleanOutputDir,
 		bundle,
