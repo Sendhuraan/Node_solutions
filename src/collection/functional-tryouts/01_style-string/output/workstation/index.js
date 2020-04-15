@@ -8,16 +8,14 @@ const styleObj = {
 	'background-color': '#fff',
 	color: undefined,
 	'border-style': 'solid',
-	'border-width': '10px'
+	'border-width': '0'
 };
-
-const outInvalid = (x) => !R.isNil(x);
 
 const styleStr = R.compose(
 	R.join(';'),
 	R.map(R.join(':')),
 	R.toPairs,
-	R.filter(outInvalid)
+	R.filter(Boolean)
 );
 
 console.log(styleStr(styleObj));
