@@ -70,6 +70,7 @@
     "pumpify": "^1.5.1",
     "ramda": "^0.27.0",
     "readable-stream": "^3.4.0",
+    "sanctuary": "^3.0.0",
     "serialize-javascript": "^1.7.0",
     "serve-static": "^1.13.2",
     "split2": "^3.1.1",

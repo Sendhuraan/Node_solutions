@@ -6,7 +6,9 @@
 		workstation: {
 			instance: {
 				parameters: {
-					server: false,
+					server: {
+						port: 3000
+					},
 					db: false
 				},
 				config: {
