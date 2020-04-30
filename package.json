@@ -60,7 +60,7 @@
     "finalhandler": "^1.1.1",
     "from2": "^2.3.0",
     "inquirer": "^6.5.2",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "mongodb": "^3.2.7",
     "mongoose": "^5.4.14",
     "multipart-read-stream": "^3.0.1",
