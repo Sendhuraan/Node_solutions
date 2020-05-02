@@ -65,6 +65,7 @@
 
 			const mediaSchema = {
 				_id: newFileId,
+				name: fileDetail.format.filename.split('.')[0],
 				width: fileDetail.streams[0].width,
 				height: fileDetail.streams[0].height,
 				size: fileDetail.format.size,
