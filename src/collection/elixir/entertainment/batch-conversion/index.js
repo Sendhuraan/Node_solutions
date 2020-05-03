@@ -57,15 +57,16 @@
 
 			fs.renameSync(oldFilePath, newFilePath);
 
-			// console.log('oldFilePath', oldFilePath);
-			// console.log('newFileId', newFileId);
-			// console.log('newFileExtension', newFileExtension);
-			// console.log('newFileName', newFileName);
-			// console.log('newFilePath', newFilePath);
+			const filename = fileDetail.format.filename.replace(
+				'D:\\MSOCACHE\\_raw-data\\',
+				''
+			);
+
+			console.log(filename);
 
 			const mediaSchema = {
 				_id: newFileId,
-				name: fileDetail.format.filename.split('.')[0],
+				name: `wtf - ${filename}`,
 				width: fileDetail.streams[0].width,
 				height: fileDetail.streams[0].height,
 				size: fileDetail.format.size,
