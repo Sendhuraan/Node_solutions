@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@sendhuraan/frontend-solutions": "^1.0.4",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "base64-encode-stream": "^1.0.0",
     "body-parser": "^1.18.3",
     "duplexify": "^4.1.1",
