@@ -20,7 +20,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "acorn": "^6.0.4",
-    "aws-sdk": "^2.437.0",
+    "aws-sdk": "^2.814.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.5",
