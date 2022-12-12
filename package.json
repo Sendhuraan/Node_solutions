@@ -55,7 +55,7 @@
     "base64-encode-stream": "^1.0.0",
     "body-parser": "^1.18.3",
     "duplexify": "^4.1.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "fast-json-parse": "^1.0.3",
     "finalhandler": "^1.1.1",
     "fluent-ffmpeg": "^2.1.2",
